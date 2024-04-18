@@ -1,7 +1,6 @@
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
 
 export default function SearchWindow() {
   return (

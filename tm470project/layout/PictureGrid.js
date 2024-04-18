@@ -5,18 +5,18 @@ export default function PictureGrid() {
     <div
       className={`grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4`}
     >
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
+      <ProductItem width={400} height={100}/>
     </div>
   );
 }

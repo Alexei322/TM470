@@ -1,5 +1,5 @@
 import * as React from "react";
-import Header from "../components/Header";
+import TillHeader from "../components/TillHeader";
 import PictureGrid from "@/layout/PictureGrid";
 import SearchWindow from "@/components/SearchWindow";
 import "@fontsource/roboto/300.css";
@@ -13,7 +13,7 @@ import PaymentOptions from "@/layout/PaymentOptions";
 export default function Home() {
   return (
     <main>
-      <Header />
+      <TillHeader />
       <div className="flex flex-col items-center">
         <PictureGrid/>
         <SearchWindow />
