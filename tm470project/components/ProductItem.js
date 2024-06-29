@@ -22,7 +22,7 @@ export default function ProductItem({
 
   const product = {name: name, price: price};
 
-  const {addToCart} = useCart();
+  const {addToCart, removeFromCart} = useCart();
 
   return (
     <div className={`flex flex-col justify-center items-center`}>
@@ -60,6 +60,7 @@ export default function ProductItem({
                 fontSize: isRemoveIconHovered ? "45px" : "35px", // Use inline style for fontSize
                 transition: "font-size 0.5s", // Optional: smooth transition for the size change
               }}
+              onClick={() => removeFromCart(product)}
             />
           </div>
         )}
