@@ -2,7 +2,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Typography } from "@mui/material";
 import { useState } from "react";
-import { useCart } from "@/CartContext";
+import { useCart, useCallback } from "@/CartContext";
 export default function ProductItem({
   width,
   height,
@@ -14,15 +14,39 @@ export default function ProductItem({
   flexDirectionInner = "col",
 }) {
   const [isAddIconHovered, setIsAddIconHovered] = useState(false);
+  const [isAddIconClickable, setIsAddIconClickable] = useState(true);
   const [isRemoveIconHovered, setIsRemoveIconHovered] = useState(false);
+  const [isRemoveIconClickable, setIsRemoveIconClickable] = useState(true);
 
   const heightWidthAdjust = fixHeightWidth === "true" ? "w-36 h-36" : "";
   const flexOuterAdjust = flexDirectionOuter === "row" ? "row" : "col";
   const flexInnerAdjust = flexDirectionInner === "row" ? "row" : "col";
 
-  const product = {name: name, price: price};
+  const product = { name: name, price: price };
 
-  const {addToCart, removeFromCart} = useCart();
+  const { addToCart, removeFromCart } = useCart();
+
+  const handleAddToCart = (product) => {
+    if (!isAddIconClickable) {
+      return;
+    }
+    addToCart(product);
+    setIsAddIconClickable(false);
+    setTimeout(() => {
+      setIsAddIconClickable(true);
+    }, 2000);
+  };
+
+  const handleRemoveFromCart = (product) => {
+    if (!isRemoveIconClickable) {
+      return;
+    }
+    removeFromCart(product);
+    setIsRemoveIconClickable(false);
+    setTimeout(() => {
+      setIsRemoveIconClickable(true);
+    }, 2000);
+  }
 
   return (
     <div className={`flex flex-col justify-center items-center`}>
@@ -49,7 +73,7 @@ export default function ProductItem({
                 fontSize: isAddIconHovered ? "45px" : "35px", // Use inline style for fontSize
                 transition: "font-size 0.3s", // Optional: smooth transition for the size change
               }}
-              onClick={() => addToCart(product)}
+              onClick={() => handleAddToCart(product)}
             />
             <RemoveIcon
               fontSize="large"
@@ -60,7 +84,7 @@ export default function ProductItem({
                 fontSize: isRemoveIconHovered ? "45px" : "35px", // Use inline style for fontSize
                 transition: "font-size 0.5s", // Optional: smooth transition for the size change
               }}
-              onClick={() => removeFromCart(product)}
+              onClick={() => handleRemoveFromCart(product)}
             />
           </div>
         )}
