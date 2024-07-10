@@ -2,8 +2,9 @@ import WebHeader from "@/components/WebHeader";
 import ProductGrid from "@/components/ProductGrid";
 import CalendarTimePicker from "@/components/CalendarTimePicker";
 import { Typography, Button } from "@mui/material";
-import {  useState } from "react";
+import { useState } from "react";
 import { useCart } from "@/CartContext";
+
 export default function WebStore() {
   const [calendarValue, setCalendarValue] = useState();
   const { calculateBasketTotal, displayCart } = useCart();

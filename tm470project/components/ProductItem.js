@@ -2,7 +2,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Typography } from "@mui/material";
 import { useState } from "react";
-import { useCart, useCallback } from "@/CartContext";
+import { useCart } from "@/CartContext";
 export default function ProductItem({
   width,
   height,
@@ -73,7 +73,7 @@ export default function ProductItem({
                 fontSize: isAddIconHovered ? "45px" : "35px", // Use inline style for fontSize
                 transition: "font-size 0.3s", // Optional: smooth transition for the size change
               }}
-              onClick={() => handleAddToCart(product)}
+              onClick={() => addToCart(product)}
             />
             <RemoveIcon
               fontSize="large"
@@ -84,7 +84,7 @@ export default function ProductItem({
                 fontSize: isRemoveIconHovered ? "45px" : "35px", // Use inline style for fontSize
                 transition: "font-size 0.5s", // Optional: smooth transition for the size change
               }}
-              onClick={() => handleRemoveFromCart(product)}
+              onClick={() => removeFromCart(product)}
             />
           </div>
         )}

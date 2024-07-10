@@ -7,16 +7,23 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import theme from "@/theme";
+import Fade from "@mui/material/Fade";
+import { useTheme } from '@mui/material/styles';
+
 export default function SignInModal() {
-  const sx = {
+  const theme = useTheme();
+  const style = {
     position: "absolute",
     top: "50%",
     left: "50%",
-    width: 900,
-    height: 900,
+    width: "400",
+    minHeight: 580,
+    height: "auto",
     transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
+    boxShadow: 12,
+    border: "10px solid #255",
+    borderRadius: "1rem",
+    p: 4,
   };
   const [modalOpen, setModalOpen] = useState(false);
   const setOpen = () => setModalOpen(true);
@@ -37,53 +44,64 @@ export default function SignInModal() {
     <ThemeProvider theme={theme}>
       <div>
         <Button onClick={setOpen}>Sign in/register</Button>
-        <Modal style={sx} open={modalOpen} onClose={setClose}>
-          <Box component="form" noValidate sx={{bgcolor: 'white'}}>
-            <Typography variant="h5">Sign up</Typography>
-            <TextField
-              label="First Name"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              required
-            ></TextField>
-            <TextField
-              label="Last Name"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              required
-            ></TextField>
-            <TextField
-              label="Email address"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              required
-            ></TextField>
-            <TextField
-              label="Username"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              required
-            ></TextField>
-            <TextField
-              label="Password"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              required
-            ></TextField>
-            <TextField
-              label="Repeat Password"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              required
-            ></TextField>
-            <Button variant="contained" color="primary"> Submit</Button>
-          </Box>
+        <Modal
+          open={modalOpen}
+          onClose={setClose}
+          slotProps={{
+            backdrop: { style: { backgroundColor: "rgba(0,0,0,0.8)" } },
+          }}
+        >
+          <Fade in={modalOpen} timeout={500}>
+            <Box style={style} component="form" noValidate>
+              <Typography variant="h5">Sign up</Typography>
+              <TextField
+                label="First Name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                required
+              ></TextField>
+              <TextField
+                label="Last Name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                required
+              ></TextField>
+              <TextField
+                label="Email address"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                required
+              ></TextField>
+              <TextField
+                label="Username"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                required
+              ></TextField>
+              <TextField
+                label="Password"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                required
+              ></TextField>
+              <TextField
+                label="Repeat Password"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                required
+              ></TextField>
+              <Button variant="contained" color="secondary">
+                {" "}
+                Submit
+              </Button>
+            </Box>
+          </Fade>
         </Modal>
       </div>
     </ThemeProvider>
