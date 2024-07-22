@@ -32,8 +32,31 @@ export default function SignInModal() {
     form,
   } = useForm();
 
-  const onSubmit = (data) => {
+  const signUpUser = async (firstName, lastName, email, username, password) => {
+    const response = await fetch("/api/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstName, lastName, email, username, password }),
+    });
+    if (!response.ok) {
+      const res = await response.json();
+      throw new Error(res.message);
+    }
+
+    const data = await response.json();
     console.log(data);
+  };
+
+  const onSubmit = async (data) => {
+    const { firstName, lastName, email, username, password } = data;
+    try {
+      await signUpUser(firstName, lastName, email, username, password);
+      setModalOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -128,63 +151,6 @@ export default function SignInModal() {
             )}
             <input type="submit" value={"Submit"} />
           </Box>
-          {/* <Box style={style} component="form" noValidate>
-          <Typography variant="h5" color={"primary"}>Sign up</Typography>
-          <TextField
-            id="First Name"
-            name="firstName"
-            label="First Name"
-            variant="outlined"
-            fullWidth
-            color="primary"
-            sx={{ backgroundColor: theme.palette.secondary.main}}
-            margin="normal"
-            required
-          ></TextField>
-          <TextField
-            label="Last Name"
-            variant="outlined"
-            fullWidth
-            sx={{ backgroundColor: theme.palette.secondary.main}}
-            margin="normal"
-            required
-          ></TextField>
-          <TextField
-            label="Email address"
-            variant="outlined"
-            fullWidth
-            sx={{ backgroundColor: theme.palette.secondary.main}}
-            margin="normal"
-            required
-          ></TextField>
-          <TextField
-            label="Username"
-            variant="outlined"
-            fullWidth
-            sx={{ backgroundColor: theme.palette.secondary.main}}
-            margin="normal"
-            required
-          ></TextField>
-          <TextField
-            label="Password"
-            variant="outlined"
-            fullWidth
-            sx={{ backgroundColor: theme.palette.secondary.main}}
-            margin="normal"
-            required
-          ></TextField>
-          <TextField
-            label="Repeat Password"
-            variant="outlined"
-            fullWidth
-            sx={{ backgroundColor: theme.palette.secondary.main}}
-            margin="normal"
-            required
-          ></TextField>
-          <Button variant="contained" color="primary">
-            Submit
-          </Button>
-        </Box> */}
         </Fade>
       </Modal>
     </div>
