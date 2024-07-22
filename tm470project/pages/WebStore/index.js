@@ -4,18 +4,20 @@ import CalendarTimePicker from "@/components/CalendarTimePicker";
 import { Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "@/CartContext";
-import { useTheme } from '@mui/material/styles';
+
+import { useTheme } from "@mui/material/styles";
 
 export default function WebStore() {
   const theme = useTheme();
   const [calendarValue, setCalendarValue] = useState();
   const { calculateBasketTotal, displayCart } = useCart();
+
   const handleCalendarChange = (value) => {
     setCalendarValue(value);
   };
 
   return (
-    <main style={{backgroundColor: theme.palette.secondary.main}}>
+    <main style={{ backgroundColor: theme.palette.secondary.main }}>
       <div className="flex flex-col items-center">
         <WebHeader />
         <ProductGrid />
