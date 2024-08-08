@@ -1,5 +1,4 @@
 import client from "@/lib/mongodb";
-import { useAuth } from "@/AuthContext";
 export default async (req, res) => {
   try {
     await client.connect();
@@ -26,7 +25,6 @@ export default async (req, res) => {
         username: username,
         password: password,
       });
-      
 
       return res.json(result);
     }

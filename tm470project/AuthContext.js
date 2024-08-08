@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const signIn = (username, email) => {
     setUserInfo({ username, email });
     setIsAuthenticated(true);
+    console.log(`Signed in as ${username}`);
   };
   const signOut = () => {
     setUserInfo({

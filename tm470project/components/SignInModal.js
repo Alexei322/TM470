@@ -3,7 +3,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import Fade from "@mui/material/Fade";
 import { useTheme } from "@mui/material/styles";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useAuth } from "@/AuthContext";
 
 export default function SignInModal() {
@@ -16,11 +16,10 @@ export default function SignInModal() {
     minHeight: 580,
     height: "auto",
     transform: "translate(-50%, -50%)",
-    // backgroundColor: "background.paper",
     border: "10px solid #FF90BC",
     borderRadius: "1rem",
     padding: "1rem",
-    zIndex: 100,
+    zIndex: 1,
   };
   const [modalOpen, setModalOpen] = useState(false);
   const setOpen = () => setModalOpen(true);
@@ -63,25 +62,52 @@ export default function SignInModal() {
     signIn(username, email);
     console.log(data);
   };
+  const signinUser = async (username, password) => {
+    const response = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!response.ok) {
+      const res = await response.json();
+      console.log(res.message);
+      throw new Error(res.message);
+    }
+    const data = await response.json();
+    signIn(username, data.email);
+    console.log(data);
+  };
 
   const onSubmit = async (data) => {
-    const { firstName, lastName, email, username, password } = data;
-    try {
-      await signUpUser(firstName, lastName, email, username, password);
-      setModalOpen(false);
-    } catch (error) {
-      console.log(error);
+    if (isRegister) {
+      const { firstName, lastName, email, username, password } = data;
+      try {
+        await signUpUser(firstName, lastName, email, username, password);
+        setModalOpen(false);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      const { username, password } = data;
+      try {
+        await signinUser(username, password);
+        setModalOpen(false);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   return (
-    <div>
+    <>
       <Button onClick={setOpen}>Sign in/register</Button>
       <Modal
         open={modalOpen}
         onClose={setClose}
         slotProps={{
-          backdrop: { style: { backgroundColor: "rgba(0,0,0,0.9)" } },
+          backdrop: { style: { backgroundColor: "rgba(0,0,0,1)" } },
         }}
       >
         <Fade in={modalOpen} timeout={500}>
@@ -217,6 +243,6 @@ export default function SignInModal() {
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 }

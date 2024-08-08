@@ -14,9 +14,7 @@ export default function ProductItem({
   flexDirectionInner = "col",
 }) {
   const [isAddIconHovered, setIsAddIconHovered] = useState(false);
-  const [isAddIconClickable, setIsAddIconClickable] = useState(true);
   const [isRemoveIconHovered, setIsRemoveIconHovered] = useState(false);
-  const [isRemoveIconClickable, setIsRemoveIconClickable] = useState(true);
 
   const heightWidthAdjust = fixHeightWidth === "true" ? "w-36 h-36" : "";
   const flexOuterAdjust = flexDirectionOuter === "row" ? "row" : "col";
@@ -25,28 +23,6 @@ export default function ProductItem({
   const product = { name: name, price: price };
 
   const { addToCart, removeFromCart } = useCart();
-
-  const handleAddToCart = (product) => {
-    if (!isAddIconClickable) {
-      return;
-    }
-    addToCart(product);
-    setIsAddIconClickable(false);
-    setTimeout(() => {
-      setIsAddIconClickable(true);
-    }, 2000);
-  };
-
-  const handleRemoveFromCart = (product) => {
-    if (!isRemoveIconClickable) {
-      return;
-    }
-    removeFromCart(product);
-    setIsRemoveIconClickable(false);
-    setTimeout(() => {
-      setIsRemoveIconClickable(true);
-    }, 2000);
-  }
 
   return (
     <div className={`flex flex-col justify-center items-center`}>
