@@ -12,6 +12,7 @@ export default function ProductItem({
   fixHeightWidth = "true",
   flexDirectionOuter = "row",
   flexDirectionInner = "col",
+  calendarTimeValue,
 }) {
   const [isAddIconHovered, setIsAddIconHovered] = useState(false);
   const [isRemoveIconHovered, setIsRemoveIconHovered] = useState(false);
@@ -20,9 +21,11 @@ export default function ProductItem({
   const flexOuterAdjust = flexDirectionOuter === "row" ? "row" : "col";
   const flexInnerAdjust = flexDirectionInner === "row" ? "row" : "col";
 
-  const product = { name: name, price: price };
+  const product = { name: name, price: price, orderDateTime: calendarTimeValue };
 
   const { addToCart, removeFromCart } = useCart();
+  
+  
 
   return (
     <div className={`flex flex-col justify-center items-center`}>

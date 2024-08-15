@@ -12,9 +12,8 @@ export default function SignInModal() {
     position: "absolute",
     top: "50%",
     left: "50%",
-    width: "800",
-    minHeight: 580,
-    height: "auto",
+    width: "80%",
+    height: "50%",
     transform: "translate(-50%, -50%)",
     border: "10px solid #FF90BC",
     borderRadius: "1rem",
@@ -81,6 +80,7 @@ export default function SignInModal() {
   };
 
   const onSubmit = async (data) => {
+    
     if (isRegister) {
       const { firstName, lastName, email, username, password } = data;
       try {
@@ -234,7 +234,6 @@ export default function SignInModal() {
               {" "}
               Submit!
             </Button>
-            {/* <input type="submit" value={"Submit"} /> */}
             <Button onClick={changeRegisterMode}>
               {isRegister
                 ? "Have an account already? Sign in!"

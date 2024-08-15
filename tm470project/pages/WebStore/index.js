@@ -6,14 +6,22 @@ import { Typography } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "@/CartContext";
 import { useTheme } from "@mui/material/styles";
+import { useAuth } from "@/AuthContext";
 
 export default function WebStore() {
   const theme = useTheme();
-  const [calendarValue, setCalendarValue] = useState();
+  const [calendarTimeValue, setCalendarTimeValue] = useState();
   const { calculateBasketTotal, displayCart } = useCart();
+  const { isAuthenticated } = useAuth();
 
-  const handleCalendarChange = (value) => {
-    setCalendarValue(value);
+  const handleCalendarTimeChange = (value) => {
+    setCalendarTimeValue({
+      day: value.$D,
+      month: value.$M + 1,
+      year: value.$y,
+      hour: value.$H,
+      minute: value.$m.toString().padStart(2, "0"),
+    });
   };
 
   return (
@@ -22,13 +30,22 @@ export default function WebStore() {
     >
       <div className="flex flex-col items-center">
         <WebHeader />
-        <ProductGrid />
-        <CalendarTimePicker updateCalendarState={handleCalendarChange} />
+        <ProductGrid calendarTimeValue={calendarTimeValue} />
+        <CalendarTimePicker
+          value={calendarTimeValue}
+          updateCalendarState={handleCalendarTimeChange}
+        />
         {displayCart()}
         <Typography variant="h3" align="center" className="p-5">
           {`£${calculateBasketTotal().toFixed(2)}`}
         </Typography>
-        <Checkout />
+        {!isAuthenticated ? (
+          <Typography variant="h5" align="center" className="p-5">
+            Please sign in to checkout
+          </Typography>
+        ) : (
+          <Checkout />
+        )}
       </div>
     </main>
   );

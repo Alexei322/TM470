@@ -1,6 +1,6 @@
 import ProductItem from "./ProductItem";
 
-export default function ProductGrid() {
+export default function ProductGrid({calendarTimeValue}) {
   return (
     <div>
       <div className="grid grid-cols-3 gap-10 justify-items-center items-center">
@@ -12,6 +12,7 @@ export default function ProductGrid() {
           price={18.95}
           flexDirectionOuter="col"
           flexDirectionInner="row"
+          calendarTimeValue={calendarTimeValue}
         />
         <ProductItem
           width={150}
@@ -21,6 +22,7 @@ export default function ProductGrid() {
           price={14.95}
           flexDirectionOuter="col"
           flexDirectionInner="row"
+          calendarTimeValue={calendarTimeValue}
         />
         <ProductItem
           width={150}
@@ -30,6 +32,7 @@ export default function ProductGrid() {
           price={50}
           flexDirectionOuter="col"
           flexDirectionInner="row"
+          calendarTimeValue={calendarTimeValue}
         />
       </div>
       <div className="flex gap-10 justify-center pt-10">
@@ -41,6 +44,7 @@ export default function ProductGrid() {
           price={21}
           flexDirectionOuter="col"
           flexDirectionInner="row"
+          calendarTimeValue={calendarTimeValue}
         />
         <ProductItem
           width={150}
@@ -50,6 +54,7 @@ export default function ProductGrid() {
           price={18}
           flexDirectionOuter="col"
           flexDirectionInner="row"
+          calendarTimeValue={calendarTimeValue}
         />
         <ProductItem
           width={150}
@@ -59,6 +64,7 @@ export default function ProductGrid() {
           price={252}
           flexDirectionOuter="col"
           flexDirectionInner="row"
+          calendarTimeValue={calendarTimeValue}
         />
       </div>
     </div>

@@ -4,10 +4,12 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-
+  console.log(cart);
+  
   const addToCart = (product) => {
     setCart((cart) => {
-      const productExists = cart.some((item) => item.name === product.name);
+      // const productExists = cart.some((item) => item.name === product.name);
+      const productExists = cart.find((item) => item.name === product.name && item.orderDateTime === product.orderDateTime);
       if (productExists) {
         return cart
           .map((item) =>
@@ -26,7 +28,7 @@ export const CartProvider = ({ children }) => {
     setCart((cart) => {
       return cart
         .map((item) =>
-          item.name === product.name
+          item.name === product.name && item.orderDateTime === product.orderDateTime
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
@@ -46,7 +48,7 @@ export const CartProvider = ({ children }) => {
         <Typography
           variant="h6"
           key={keyVal}
-        >{`${item.name} - £${item.price} Quantity: ${item.quantity}`}</Typography>
+        >{`${item.name} - £${item.price} Quantity: ${item.quantity} Time: ${item.orderDateTime.day}/${item.orderDateTime.month}/${item.orderDateTime.year} at ${item.orderDateTime.hour}:${item.orderDateTime.minute}`}</Typography>
       );
     });
   };
