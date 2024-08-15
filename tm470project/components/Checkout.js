@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTheme } from "@mui/material/styles";
 import ItemSummary from "./ItemSummary";
+import { useCart } from "@/CartContext";
 
 export default function Checkout() {
   const theme = useTheme();
@@ -41,10 +42,23 @@ export default function Checkout() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const { name, cardNumber, expDate, ccv } = data;
-    console.log("y");
-    console.log(name, cardNumber, expDate, ccv);
+  const {cart} = useCart();
+
+  const onSubmit = async () => {
+    const response = await fetch("/api/payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        
+      }, 
+      body: JSON.stringify(cart)
+    })
+    if(!response.ok){
+      const res = await response.json();
+      console.log(res.message);
+      throw new Error(res.message);
+    }
+    const data = await response.json();
   };
 
   return (

@@ -26,7 +26,7 @@ export default function WebStore() {
 
   return (
     <main
-      style={{ backgroundColor: theme.palette.secondary.main, height: "100%" }}
+      style={{ backgroundColor: theme.palette.secondary.main }}
     >
       <div className="flex flex-col items-center">
         <WebHeader />

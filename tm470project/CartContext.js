@@ -8,7 +8,6 @@ export const CartProvider = ({ children }) => {
   
   const addToCart = (product) => {
     setCart((cart) => {
-      // const productExists = cart.some((item) => item.name === product.name);
       const productExists = cart.find((item) => item.name === product.name && item.orderDateTime === product.orderDateTime);
       if (productExists) {
         return cart
