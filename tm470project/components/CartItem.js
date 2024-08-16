@@ -1,8 +1,6 @@
 import { Typography } from "@mui/material";
 
 export default function CartItem({item}) {
-  console.log(item);
-
   return (
     <>
       <Typography color="white">{item.name}</Typography>

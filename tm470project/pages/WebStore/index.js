@@ -2,7 +2,7 @@ import WebHeader from "@/components/WebHeader";
 import ProductGrid from "@/components/ProductGrid";
 import CalendarTimePicker from "@/components/CalendarTimePicker";
 import Checkout from "@/components/Checkout";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "@/CartContext";
 import { useTheme } from "@mui/material/styles";
@@ -11,7 +11,8 @@ import { useAuth } from "@/AuthContext";
 export default function WebStore() {
   const theme = useTheme();
   const [calendarTimeValue, setCalendarTimeValue] = useState();
-  const { calculateBasketTotal, displayCart } = useCart();
+  const { calculateBasketTotal, displayCart, clearCart, isCartEmpty } =
+    useCart();
   const { isAuthenticated } = useAuth();
 
   const handleCalendarTimeChange = (value) => {
@@ -25,9 +26,7 @@ export default function WebStore() {
   };
 
   return (
-    <main
-      style={{ backgroundColor: theme.palette.secondary.main }}
-    >
+    <main style={{ backgroundColor: theme.palette.secondary.main }}>
       <div className="flex flex-col items-center">
         <WebHeader />
         <ProductGrid calendarTimeValue={calendarTimeValue} />
@@ -44,7 +43,10 @@ export default function WebStore() {
             Please sign in to checkout
           </Typography>
         ) : (
-          <Checkout />
+          <> 
+            <Checkout />
+            {!isCartEmpty() && <Button style={{color:"black"}} onClick={clearCart}>Clear cart</Button>}
+          </>
         )}
       </div>
     </main>

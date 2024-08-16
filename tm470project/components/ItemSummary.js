@@ -5,7 +5,6 @@ import {v4 as uuidv4} from "uuid";
 
 export default function ItemSummary() {
   const { cart, calculateBasketTotal, displayCart } = useCart();
-  console.log(cart);
 
   return (
     <Box>

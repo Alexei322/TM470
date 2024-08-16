@@ -6,9 +6,12 @@ export default (async function handler(req, res) {
 
     if (req.method === "POST") {
       const { username, orders } = req.body;
+      console.log(username);
+      console.log(orders);
+      
       const existingCustomer = await db
         .collection("customers")
-        .updateOne({ username: username }, { $push: { orders: orders } });
+        .updateOne({ username: username }, { $set: { orders: orders } });
       return res.json(existingCustomer);
     }
   } catch (error) {

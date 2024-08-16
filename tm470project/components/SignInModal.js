@@ -39,7 +39,7 @@ export default function SignInModal() {
   const { signIn } = useAuth();
 
   const signUpUser = async (firstName, lastName, email, username, password) => {
-    const response = await fetch("/api/signin", {
+    const response = await fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export default function SignInModal() {
     console.log(data);
   };
   const signinUser = async (username, password) => {
-    const response = await fetch("/api/signup", {
+    const response = await fetch("/api/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,6 @@ export default function SignInModal() {
     });
     if (!response.ok) {
       const res = await response.json();
-      console.log(res.message);
       throw new Error(res.message);
     }
     const data = await response.json();
@@ -100,6 +99,9 @@ export default function SignInModal() {
     }
   };
 
+  
+
+  
   return (
     <>
       <Button onClick={setOpen}>Sign in/register</Button>
