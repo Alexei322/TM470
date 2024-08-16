@@ -11,7 +11,7 @@ export default (async function handler(req, res) {
       
       const existingCustomer = await db
         .collection("customers")
-        .updateOne({ username: username }, { $set: { orders: orders } });
+        .updateOne({ username: username }, { $push: { orders: orders } });
       return res.json(existingCustomer);
     }
   } catch (error) {

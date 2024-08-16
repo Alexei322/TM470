@@ -26,6 +26,8 @@ export default function SignInModal() {
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [emailTaken, setEmailTaken] = useState(false);
   const [isRegister, setIsRegister] = useState(true);
+  const [signInError, setSignInError] = useState("");
+
   const changeRegisterMode = () => {
     setIsRegister(!isRegister);
     setUsernameTaken(false);
@@ -59,7 +61,6 @@ export default function SignInModal() {
 
     const data = await response.json();
     signIn(username, email);
-    console.log(data);
   };
   const signinUser = async (username, password) => {
     const response = await fetch("/api/signin", {
@@ -71,15 +72,16 @@ export default function SignInModal() {
     });
     if (!response.ok) {
       const res = await response.json();
+      setSignInError(res.message);
+
       throw new Error(res.message);
     }
     const data = await response.json();
     signIn(username, data.email);
-    console.log(data);
   };
 
   const onSubmit = async (data) => {
-    
+    setSignInError("");
     if (isRegister) {
       const { firstName, lastName, email, username, password } = data;
       try {
@@ -99,9 +101,6 @@ export default function SignInModal() {
     }
   };
 
-  
-
-  
   return (
     <>
       <Button onClick={setOpen}>Sign in/register</Button>
@@ -231,6 +230,9 @@ export default function SignInModal() {
             )}
             {emailTaken && (
               <Typography color="error">Email already taken</Typography>
+            )}
+            {signInError && (
+              <Typography color="error">{signInError}</Typography>
             )}
             <Button type="submit" variant="contained">
               {" "}
