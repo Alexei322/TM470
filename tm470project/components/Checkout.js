@@ -5,9 +5,11 @@ import { useTheme } from "@mui/material/styles";
 import ItemSummary from "./ItemSummary";
 import { useCart } from "@/CartContext";
 import { useAuth } from "@/AuthContext";
+import { useRouter } from "next/router";
 
 export default function Checkout() {
   const theme = useTheme();
+  const router = useRouter();
   const style = {
     position: "absolute",
     top: "50%",
@@ -60,6 +62,7 @@ export default function Checkout() {
       throw new Error(res.message);
     }
     const data = await response.json();
+    router.push("/order-confirmation");
   };
 
   return (

@@ -68,7 +68,7 @@ export const CartProvider = ({ children }) => {
         calculateBasketTotal,
         displayCart,
         clearCart,
-        isCartEmpty
+        isCartEmpty 
       }}
     >
       {children}
